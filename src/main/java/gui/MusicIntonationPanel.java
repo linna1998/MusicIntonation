@@ -4,33 +4,30 @@ import core.GameChangeListener;
 import core.MusicIntonationInterface;
 
 import javax.swing.*;
-
-import static core.MusicIntonationImplementation.NOTE_COUNT;
+import java.awt.*;
 
 public class MusicIntonationPanel extends JPanel implements GameChangeListener {
 
-  private JTextArea noteName = new JTextArea("");
+  private ControlPanel controlPanel;
+  private MusicPanel musicPanel;
 
   MusicIntonationPanel(MusicIntonationInterface musicIntonation) {
     musicIntonation.addGameChangeListener(this);
 
-    noteName.setText(musicIntonation.getNoteName());
-    add(noteName);
+    setLayout(new BorderLayout());
 
-    for (int i = 0; i < NOTE_COUNT; i++) {
-      JButton button = new JButton();
-      int finalI = i;
-      button.addActionListener(e -> musicIntonation.beepNote(finalI));
-      add(button);
-    }
+    controlPanel = new ControlPanel(musicIntonation);
+    add(controlPanel, BorderLayout.NORTH);
 
-    // add the restart button
-    JButton button = new JButton("Restart");
+    musicPanel = new MusicPanel(musicIntonation);
+    add(musicPanel, BorderLayout.CENTER);
+
+    // add the confirm button
+    JButton button = new JButton("Confirm");
     button.addActionListener(e -> {
       musicIntonation.randomHertz();
-      noteName.setText(musicIntonation.getNoteName());
     });
-    add(button);
+    add(button, BorderLayout.SOUTH);
   }
 
 }

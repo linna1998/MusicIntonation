@@ -14,6 +14,9 @@ public class MusicIntonationImplementation implements MusicIntonationInterface {
   private List<GameChangeListener> gameChangeListeners = new ArrayList<>();
   private int correctNoteIndex;
   private Note correctNote;
+  private int level = 0;
+  private int healthPoints = 3;
+  private int selectNoteIndex;
 
   public MusicIntonationImplementation(Instrumental instrument) {
     this.instrument = instrument;
@@ -28,6 +31,7 @@ public class MusicIntonationImplementation implements MusicIntonationInterface {
   @Override
   public void beepNote(int index) {
     instrument.beep(noteList.get(index));
+    selectNoteIndex = index;
   }
 
   @Override
@@ -65,5 +69,15 @@ public class MusicIntonationImplementation implements MusicIntonationInterface {
   @Override
   public String getNoteName() {
     return correctNote.getName();
+  }
+
+  @Override
+  public int getLevel() {
+    return level;
+  }
+
+  @Override
+  public int getHealthPoints() {
+    return healthPoints;
   }
 }

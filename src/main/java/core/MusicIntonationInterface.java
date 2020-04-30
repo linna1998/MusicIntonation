@@ -8,4 +8,8 @@ public interface MusicIntonationInterface {
   void randomHertz();
 
   String getNoteName();
+
+  int getLevel();
+
+  int getHealthPoints();
 }

@@ -3,17 +3,16 @@ package gui;
 import core.GeneralInstrument;
 import core.Instrumental;
 import core.MusicIntonationImplementation;
+import core.MusicIntonationInterface;
 
 import javax.swing.*;
 
 public class MusicIntonationGame extends JPanel {
-  private MusicIntonationImplementation musicIntonationImplementation;
-  private MusicIntonationPanel panel;
 
   MusicIntonationGame() {
     Instrumental instrumental = new GeneralInstrument();
-    musicIntonationImplementation = new MusicIntonationImplementation(instrumental);
-    panel = new MusicIntonationPanel(musicIntonationImplementation);
+    MusicIntonationInterface musicIntonation = new MusicIntonationImplementation(instrumental);
+    MusicIntonationPanel panel = new MusicIntonationPanel(musicIntonation);
 
     add(panel);
     setVisible(true);
