@@ -27,4 +27,10 @@ public class ControlPanel extends JPanel {
     add(healthPointsName);
     add(healthPoints);
   }
+
+  void updateStatus(MusicIntonationInterface musicIntonation) {
+    level.setText(String.valueOf(musicIntonation.getLevel()));
+    note.setText(musicIntonation.getNoteName());
+    healthPoints.setText(String.valueOf(musicIntonation.getHealthPoints()));
+  }
 }

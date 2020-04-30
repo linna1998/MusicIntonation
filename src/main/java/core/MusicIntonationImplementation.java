@@ -50,6 +50,9 @@ public class MusicIntonationImplementation implements MusicIntonationInterface {
     }
     delta = delta / 2;
 
+    // the difficulty increases with the level
+    delta = delta / (level + 1);
+
     noteList.clear();
     noteList.add(correctNote.getHertz());
     for (int i = 1; i < NOTE_COUNT; i++) {
@@ -64,6 +67,10 @@ public class MusicIntonationImplementation implements MusicIntonationInterface {
         correctNoteIndex = i;
       }
     }
+
+    System.out.println("noteList: " + noteList);
+    System.out.println("correctNoteIndex: " + correctNoteIndex);
+    System.out.println("correctNoteName: " + correctNote.getName());
   }
 
   @Override
@@ -79,5 +86,21 @@ public class MusicIntonationImplementation implements MusicIntonationInterface {
   @Override
   public int getHealthPoints() {
     return healthPoints;
+  }
+
+  @Override
+  public void updateStatus() {
+
+    if (selectNoteIndex == correctNoteIndex) {
+      level++;
+    } else {
+      healthPoints--;
+    }
+
+    if (healthPoints == 0) {
+      for (GameChangeListener listener : gameChangeListeners) {
+        listener.gameEnded();
+      }
+    }
   }
 }

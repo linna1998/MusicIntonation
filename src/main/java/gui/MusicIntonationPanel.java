@@ -4,30 +4,34 @@ import core.GameChangeListener;
 import core.MusicIntonationInterface;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class MusicIntonationPanel extends JPanel implements GameChangeListener {
 
-  private ControlPanel controlPanel;
-  private MusicPanel musicPanel;
+  private MusicIntonationInterface musicIntonation;
+  private GamePanel gamePanel;
+  private GameEndedPanel gameEndedPanel;
 
-  MusicIntonationPanel(MusicIntonationInterface musicIntonation) {
-    musicIntonation.addGameChangeListener(this);
+  MusicIntonationPanel(MusicIntonationInterface musicIntonationInterface) {
+    this.musicIntonation = musicIntonationInterface;
+    musicIntonationInterface.addGameChangeListener(this);
 
-    setLayout(new BorderLayout());
+    gamePanel = new GamePanel(musicIntonationInterface);
+    gameEndedPanel = new GameEndedPanel();
 
-    controlPanel = new ControlPanel(musicIntonation);
-    add(controlPanel, BorderLayout.NORTH);
-
-    musicPanel = new MusicPanel(musicIntonation);
-    add(musicPanel, BorderLayout.CENTER);
-
-    // add the confirm button
-    JButton button = new JButton("Confirm");
-    button.addActionListener(e -> {
-      musicIntonation.randomHertz();
-    });
-    add(button, BorderLayout.SOUTH);
+    add(gamePanel);
+    add(gameEndedPanel);
+    gamePanel.setVisible(true);
+    gamePanel.setEnabled(true);
+    gameEndedPanel.setVisible(false);
+    gameEndedPanel.setEnabled(false);
   }
 
+  @Override
+  public void gameEnded() {
+    gameEndedPanel.updateScore(musicIntonation.getLevel());
+    gamePanel.setVisible(false);
+    gamePanel.setEnabled(false);
+    gameEndedPanel.setVisible(true);
+    gameEndedPanel.setEnabled(true);
+  }
 }

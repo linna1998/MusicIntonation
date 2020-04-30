@@ -12,4 +12,6 @@ public interface MusicIntonationInterface {
   int getLevel();
 
   int getHealthPoints();
+
+  void updateStatus();
 }

@@ -35,9 +35,7 @@ public class MusicPanel extends JPanel {
       button.setIcon(new ImageIcon(naturalNote));
       int finalI = i;
       button.addActionListener(e -> {
-        for (JButton button1 : buttonList) {
-          button1.setIcon(new ImageIcon(naturalNote));
-        }
+        clearSelections();
         button.setSelected(true);
         button.setIcon(new ImageIcon(selectedNote));
 
@@ -45,6 +43,12 @@ public class MusicPanel extends JPanel {
       });
       add(button);
       buttonList.add(button);
+    }
+  }
+
+  void clearSelections() {
+    for (JButton button : buttonList) {
+      button.setIcon(new ImageIcon(naturalNote));
     }
   }
 }
