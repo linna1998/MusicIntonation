@@ -16,10 +16,16 @@ public class MusicIntonationPanel extends JPanel implements GameChangeListener {
     musicIntonationInterface.addGameChangeListener(this);
 
     gamePanel = new GamePanel(musicIntonationInterface);
-    gameEndedPanel = new GameEndedPanel();
+    gameEndedPanel = new GameEndedPanel(this);
 
     add(gamePanel);
     add(gameEndedPanel);
+    startNewGame();
+  }
+
+  void startNewGame() {
+    musicIntonation.startNewGame();
+    gamePanel.updateStatus();
     gamePanel.setVisible(true);
     gamePanel.setEnabled(true);
     gameEndedPanel.setVisible(false);

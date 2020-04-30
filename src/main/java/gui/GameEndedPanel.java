@@ -5,9 +5,15 @@ import java.awt.*;
 
 public class GameEndedPanel extends JPanel {
   JTextArea result = new JTextArea("");
+  JButton button = new JButton("Restart");
 
-  GameEndedPanel() {
-    add(result);
+  GameEndedPanel(MusicIntonationPanel panel) {
+    setLayout(new BorderLayout());
+    add(result, BorderLayout.NORTH);
+    add(button, BorderLayout.SOUTH);
+    button.addActionListener(e -> {
+      panel.startNewGame();
+    });
   }
 
   void updateScore(int score) {

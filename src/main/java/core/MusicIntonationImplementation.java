@@ -20,12 +20,19 @@ public class MusicIntonationImplementation implements MusicIntonationInterface {
 
   public MusicIntonationImplementation(Instrumental instrument) {
     this.instrument = instrument;
-    randomHertz();
+    startNewGame();
   }
 
   @Override
   public void addGameChangeListener(GameChangeListener listener) {
     gameChangeListeners.add(listener);
+  }
+
+  @Override
+  public void startNewGame() {
+    level = 0;
+    healthPoints = 3;
+    randomHertz();
   }
 
   @Override

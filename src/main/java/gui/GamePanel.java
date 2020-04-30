@@ -7,13 +7,18 @@ import java.awt.*;
 
 public class GamePanel extends JPanel {
 
+  MusicIntonationInterface musicIntonation;
+  ControlPanel controlPanel;
+  MusicPanel musicPanel;
+
   GamePanel(MusicIntonationInterface musicIntonation) {
+    this.musicIntonation = musicIntonation;
     setLayout(new BorderLayout());
 
-    ControlPanel controlPanel = new ControlPanel(musicIntonation);
+    controlPanel = new ControlPanel(musicIntonation);
     add(controlPanel, BorderLayout.NORTH);
 
-    MusicPanel musicPanel = new MusicPanel(musicIntonation);
+    musicPanel = new MusicPanel(musicIntonation);
     add(musicPanel, BorderLayout.CENTER);
 
     // add the confirm button
@@ -21,9 +26,13 @@ public class GamePanel extends JPanel {
     button.addActionListener(e -> {
       musicIntonation.updateStatus();
       musicIntonation.randomHertz();
-      controlPanel.updateStatus(musicIntonation);
-      musicPanel.clearSelections();
+      updateStatus();
     });
     add(button, BorderLayout.SOUTH);
+  }
+
+  void updateStatus() {
+    controlPanel.updateStatus(musicIntonation);
+    musicPanel.clearSelections();
   }
 }

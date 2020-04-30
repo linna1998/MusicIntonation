@@ -23,9 +23,9 @@ public class MusicPanel extends JPanel {
 
     try {
       BufferedImage naturalImage = ImageIO.read(new File("src/main/resources/music_note.png"));
-      naturalNote = naturalImage.getScaledInstance(50, 200, Image.SCALE_SMOOTH);
+      naturalNote = naturalImage.getScaledInstance(116, 200, Image.SCALE_SMOOTH);
       BufferedImage selectedImage = ImageIO.read(new File("src/main/resources/selected_note.png"));
-      selectedNote = selectedImage.getScaledInstance(50, 200, Image.SCALE_SMOOTH);
+      selectedNote = selectedImage.getScaledInstance(116, 200, Image.SCALE_SMOOTH);
     } catch (IOException e) {
       e.printStackTrace();
     }

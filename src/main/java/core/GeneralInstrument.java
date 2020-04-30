@@ -1,7 +1,5 @@
 package core;
 
-import org.jfugue.player.Player;
-
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
@@ -11,7 +9,7 @@ public class GeneralInstrument implements Instrumental {
   public static float SAMPLE_RATE = 44100f;
 
   // https://stackoverflow.com/questions/1932490/java-generating-sound
-  public static void tone(double hertz, int msecs, double vol) throws LineUnavailableException {
+  public static void tone(double hertz, int msecs) throws LineUnavailableException {
     byte[] buf = new byte[2];
 
     AudioFormat af = new AudioFormat(SAMPLE_RATE, 16, 1, true, false);
@@ -29,15 +27,10 @@ public class GeneralInstrument implements Instrumental {
     sdl.stop();
   }
 
-  void tone2() {
-    Player player = new Player();
-    player.play("C D E F G A B");
-  }
-
   @Override
   public void beep(double hertz) {
     try {
-      tone(hertz, 1000, 10);
+      tone(hertz, 1000);
     } catch (LineUnavailableException e) {
       e.printStackTrace();
     }
